@@ -7,9 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 public class Calculater extends Application {
-	private static double num;
-	private static int op;
-	private static int p=0;
+	private static double num;//暫存值
+	private static int op;//運算的判斷
+	private static int p=0;//小數點使用與否
   @Override
   public void start(Stage primaryStage) {
 	  GridPane pane = new GridPane();
@@ -63,7 +63,7 @@ public class Calculater extends Application {
 		  b[i].setOnAction(e -> {
 			  if(p!=1&&Long.parseLong(t.getText())==0) {
 				  t.setText("");
-			  }
+			  }//為了避免跑出0123之類的情況
 			  t.setText(t.getText()+b[x].getText());
 		  });
 	  }
@@ -100,7 +100,7 @@ public class Calculater extends Application {
 		  result=0L;
 		  op=0;
 		  t.setText(Double.toString(num));
-		  p=1;
+		  p=1;//因使用double,所以就算是整數,其結尾也會是.0
 	  });
 	  b[16].setOnAction(e -> {
 		  t.setText("0");
@@ -111,7 +111,7 @@ public class Calculater extends Application {
 		  for(int i=0;i<t.getLength()-1;i++)n[i] = t.getText().charAt(i);
 		  if(t.getLength()-1==0) {
 			  t.setText("0");
-		  }
+		  }//避免扣過頭
 		  else {
 			  t.setText(String.valueOf(n));
 		  }
@@ -122,15 +122,6 @@ public class Calculater extends Application {
 	  b[18].setOnAction(e -> {
 		  t.setText(Integer.toString(Integer.parseInt(t.getText())*-1));
 	  });
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
 	  Scene scene = new Scene(pane, 400, 360);
 	  primaryStage.setTitle("ShowCircleCentered");
 	  primaryStage.setScene(scene);
